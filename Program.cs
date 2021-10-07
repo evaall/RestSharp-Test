@@ -11,6 +11,7 @@ namespace TestApiCalls
         static async Task Main()
         {
             var client = new RestClient("https://jsonplaceholder.typicode.com/todos");
+
             // By pass Proxy
             IWebProxy proxy = WebRequest.GetSystemWebProxy();
             proxy.Credentials = CredentialCache.DefaultCredentials;
@@ -18,6 +19,11 @@ namespace TestApiCalls
 
             // Build Request
             RestRequest request = new RestRequest(Method.GET);
+            
+            // Add Token to Head
+            request.AddHeader("token", "1234");
+            
+            
             // Exexute Resquest 
             IRestResponse response = client.Execute(request);
             // Convert resoponse to string
